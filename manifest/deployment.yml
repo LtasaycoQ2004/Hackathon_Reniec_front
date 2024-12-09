@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-moderator-fe
+  namespace: luis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: content-moderator-fe
+  template:
+    metadata:
+      labels:
+        app: content-moderator-fe
+    spec:
+      containers:
+      - name: content-moderator-fe
+        image: luistasayco2004/front_traductor:definit 
+        env:
+        - name: API_BACKEND
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials          
+              key: API_BACKEND
+
