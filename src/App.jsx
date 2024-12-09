@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import './App.css';
-import {BASE_URL} from './config/apiConfig'
+import BASE_URL from './config/apiConfig'
 
 function App() {
   const url = BASE_URL+"reniec";

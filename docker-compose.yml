@@ -1,8 +1,8 @@
 version: '3'
 services:
   front:
-    image: mi-imagen
+    image: luistasayco2004/hackathon_frontend_reniec:definit
     ports:
       - "5173:5173"
     environment:
-      API_BACKEND: "https://ubiquitous-space-rotary-phone-5gx49g4j65r7fpw4-8080.app.github.dev/"
+      VITE_API_BACKEND: "https://curly-guide-ggq54j4g946fp6v9-8080.app.github.dev/"
