@@ -1,7 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_BACKEND;
+const API_BACKEND = "https://effective-chainsaw-wrpxxpjw99jh5qw4-8080.app.github.dev/";
 
-if (!BASE_URL) {
-  throw new Error("La variable de entorno VITE_API_BACKEND no está definida.");
-}
-console.log("LA URL ES: ",BASE_URL)
-export default BASE_URL;
+console.log("Mi api:  ",API_BACKEND)
+export default API_BACKEND;

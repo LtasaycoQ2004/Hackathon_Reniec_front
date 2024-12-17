@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import './App.css';
-import BASE_URL from './config/apiConfig'
+import API_BACKEND from './config/apiConfig'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function App() {
-  const url = BASE_URL+"reniec";
+  const url = API_BACKEND + "reniec";
 
   const [todos, setTodos] = useState([]);
   const [isActive, setIsActive] = useState(true);
@@ -139,34 +141,44 @@ function App() {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container">
 
-      <h1 class="api-title">API RENIEC - HACKATHON</h1>
+
+      <div class="container_titulo">
+        <h1 class="api-title">Haackathon Reniec - Jonas</h1>
+
+        <img src="https://cdn.joinnus.com/blog/wp-content/uploads/2018/04/20161325/Icono_pregunta8.8.1F.png" className='imagensdni' />
+      </div>
+
+
       <br />
       <br />
 
-      <div className="d-flex justify-content-between mb-3">
-        <Button
+      <div className="botones_extras">
+        <button
           variant="warning"
           onClick={toggleActive}
-          className="btn-custom"
-        >
+          className="lista_btn"
+        ><i class="bi bi-card-checklist"></i> -
           {isActive ? 'Mostrar Inactivos' : 'Mostrar Activos'}
-        </Button>
-        <Button
+        </button>
+
+
+
+
+        <button
           variant="success"
           onClick={handleShowRegistrar}
-          className="btn-custom"
-        >
-          Registrar
-        </Button>
+          className="registrar_btn"
+        > <i class="bi bi-file-earmark-diff"></i>
+          -         Registrar
+        </button>
       </div>
 
       {todos.length === 0 ? (
-        <div className="loading">Cargando...</div>
+        <div className="loading">Cargando los datos... :)</div>
 
       ) : (
-
 
         <Table striped bordered hover responsive className="table-custom">
           <thead>
@@ -176,6 +188,7 @@ function App() {
               <th>NOMBRES</th>
               <th>APELLIDO PATERNO</th>
               <th>APELLIDO MATERNO</th>
+              <th>CODE V</th>
               <th>ACCIONES</th>
             </tr>
           </thead>
@@ -187,6 +200,7 @@ function App() {
                 <td>{todo.nombres}</td>
                 <td>{todo.apellidoPaterno}</td>
                 <td>{todo.apellidoMaterno}</td>
+                <td>{todo.codVerifica}</td>
                 <td>
                   <div className="action-buttons">
                     {isActive && (
@@ -195,7 +209,7 @@ function App() {
                         onClick={() => handleShowEditar(todo.id, todo.dni)}
                         className="btn-action"
                       >
-                        Editar
+                        <i class="bi bi-pencil-square"></i>
                       </Button>
                     )}
                     {isActive && (
@@ -203,12 +217,12 @@ function App() {
                         variant="danger"
                         onClick={() => handleShowEliminar(todo.id)}
                       >
-                        Eliminar
+                        <i class="bi bi-trash3"></i>
                       </Button>
                     )}
                     {!isActive && (
                       <Button variant="success" onClick={() => handleShowRestaurar(todo.id)} >
-                        Restaurar
+                        <i class="bi bi-arrow-clockwise"></i>
                       </Button>
                     )}
                   </div>
@@ -221,10 +235,10 @@ function App() {
 
       <Modal show={showEliminar} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Eliminar Traducción</Modal.Title>
+          <Modal.Title>Eliminar Registro</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          ¿Está seguro de querer eliminar la traducción con el ID: {selectedId}?
+          ¿Está seguro de querer eliminar el registro con el ID: {selectedId}?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
@@ -234,9 +248,9 @@ function App() {
 
       <Modal show={showRestaurar} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Restaurar Traducción</Modal.Title>
+          <Modal.Title>Restaurar Registro</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Restaurar datos con el ID: {selectedId}</Modal.Body>
+        <Modal.Body>Restaurar datos de la persona con el ID: {selectedId}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
           <Button variant="success" onClick={() => restaurar(selectedId)}>Restaurar</Button>
@@ -245,7 +259,7 @@ function App() {
 
       <Modal show={showRegistrar} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Registrar Traducción</Modal.Title>
+          <Modal.Title>Registrar una nueva Persona</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -260,7 +274,7 @@ function App() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='btn_registra'>
           <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
           <Button variant="success" onClick={() => consultarDni(dni)}>Consultar</Button>
 
@@ -284,7 +298,7 @@ function App() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='editar_btn_footer'>
           <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
           <Button variant="primary" onClick={editarDni}>Actualizar</Button>
         </Modal.Footer>
